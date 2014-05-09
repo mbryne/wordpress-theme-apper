@@ -48,67 +48,12 @@ function apper_setup() {
 		'footer' => __( 'Footer Menu', 'apper' ),
 	) );
 
-	// Enable support for Post Formats.
-	add_theme_support( 'post-formats', array( 'aside', 'image', 'video', 'quote', 'link' ) );
-
-	// Setup the WordPress core custom background feature.
-	add_theme_support( 'custom-background', apply_filters( 'apper_custom_background_args', array(
-		'default-color' => 'ffffff',
-		'default-image' => '',
-	) ) );
-
 	// Enable support for HTML5 markup.
 	add_theme_support( 'html5', array( 'comment-list', 'search-form', 'comment-form', ) );
 }
 endif; // apper_setup
 add_action( 'after_setup_theme', 'apper_setup' );
 
-/**
- * Register widgetized area and update sidebar with default widgets.
- */
-function apper_widgets_init() {
-
-    register_sidebar( array(
-        'name'          => 'Default Sidebar',
-        'id'            => 'main-sidebar',
-        'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</aside>',
-        'before_title'  => '<h1 class="widget-title">',
-        'after_title'   => '</h1>',
-    ) );
-
-    register_sidebar( array(
-        'name'          => 'Default Footer',
-        'id'            => 'main-footer',
-        'before_widget' => '<span id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</span>',
-        'before_title'  => '<h1 class="widget-title">',
-        'after_title'   => '</h1>',
-    ) );
-
-    register_sidebar( array(
-		'name'          => 'Homepage Sidebar',
-		'id'            => 'home-sidebar',
-        'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</aside>',
-		'before_title'  => '<h1 class="widget-title">',
-		'after_title'   => '</h1>',
-	) );
-
-    register_sidebar( array(
-        'name'          => 'Homepage Footer',
-        'id'            => 'home-footer',
-        'before_widget' => '',
-        'after_widget'  => '',
-        'before_widget' => '<span id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</span>',
-        'before_title'  => '<h1 class="widget-title">',
-        'after_title'   => '</h1>',
-    ) );
-
-}
-
-add_action( 'widgets_init', 'apper_widgets_init' );
 
 /**
  * Enqueue scripts and styles.
@@ -143,22 +88,21 @@ function remove_admin_bar()
  * Custom template tags for this theme.
  */
 
+/**
+ * Review the following
+ */
+
 locate_template(array('/inc/template-tags.php'), true);
-
-/**
- * Custom functions that act independently of the theme templates.
- */
-
-locate_template(array('/inc/extras.php'), true);
-
-/**
- * Customizer additions.
- */
 locate_template(array('/inc/customizer.php'), true);
+locate_template(array('/inc/extras.php'), true);
 
 /**
  * Theme Extensions
  */
+locate_template(array('/inc/sidebar.php'), true);
+locate_template(array('/inc/helpers.php'), true);
 locate_template(array('/inc/shortcodes.php'), true);
 locate_template(array('/inc/widgets.php'), true);
 locate_template(array('/lib/soliliquy.php'), true);
+locate_template(array('/inc/types.php'), true);
+locate_template(array('/inc/data.php'), true);

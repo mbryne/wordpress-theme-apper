@@ -41,7 +41,7 @@
 					<div class="col-md-4 col-xs-12">
 					
 						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="logo">
-							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo.png" alt="<?php bloginfo('name'); ?>" class="logo-img" width="305" />
+							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo.png" alt="<?php bloginfo('name'); ?>" class="logo-img" />
 						</a>
 						
 						<p class="tagline"><?php bloginfo( 'description' ); ?></p>

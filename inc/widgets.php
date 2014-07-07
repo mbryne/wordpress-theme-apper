@@ -3,10 +3,12 @@
 class apper_spotlight_link_widget extends WP_Widget
 {
 
+    static $blank_image = '_BLANK_';
+
     function __construct()
     {
         parent::__construct(
-            'nucleo_sidebarnav_widget',
+            'apper_sidebarnav_widget',
             __('Spotlight Link', 'apper_spotlight_link_widget_domain'),
             array('description' => __('Add a Spotlight Link to the Sidebar', 'apper_spotlight_link_widget_domain'),)
         );
@@ -32,6 +34,9 @@ class apper_spotlight_link_widget extends WP_Widget
         //  add col-md-6 to footer widgets
         if (strpos($args['id'], "footer"))
             $class .= "col-md-6";
+
+        if ($image == '_BLANK_')
+            $image = get_stylesheet_directory_uri() . '/images/blank.png';
 
         $values =
             'image="' . $image . '" ' .
@@ -71,13 +76,16 @@ class apper_spotlight_link_widget extends WP_Widget
             $images = new WP_Query( array( 'post_type' => 'attachment', 'post_status' => 'inherit', 'post_mime_type' => 'image' , 'posts_per_page' => -1 ) );
             if( $images->have_posts() ){
                 $options = "";
+
+                $options .= '<option value="_BLANK_" ' . selected( $image, $this::$blank_image, false ) . '>Blank Placeholder</option>';
+
                 while( $images->have_posts() ) {
                     $images->the_post();
                     $img_src = wp_get_attachment_image_src(get_the_ID(), 'large');
                     $options .= '<option value="' . $img_src[0] . '" ' . selected( $image, $img_src[0], false ) . '>' . get_the_title() . '</option>';
                 }
                 echo '<select name="' . $this->get_field_name( 'image' ) . '">';
-                echo '<option value="' . selected( $the_link, '', false ) . '">-- select -- </option>';
+                echo '<option value="' . selected( $image, '', false ) . '">-- select -- </option>';
                 echo $options;
                 echo '</select>';
             }

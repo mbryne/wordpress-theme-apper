@@ -13,19 +13,23 @@ function apper_spotlight_link ($atts) {
       'new'  => false
    ), $atts));
 
-    if (empty($icon)) $icon = 'arrow-right';
     $target = ($new == "1") ? " target='_blank' " : '';
+
+    if (!starts_with($link, "http"))
+        $link = get_home_url() . esc_url( $link );
 
 	?>
 
-        <a href="<?php echo esc_url( $link ); ?>" <?php echo $target; ?>
+        <a href="<?php echo $link; ?>" <?php echo $target; ?>
            class="spotlight-link <?php echo $class; ?>">
 
            <img src="<?php echo $image; ?>" alt="<?php echo $link; ?>" />
 
            <b>
                 <?php echo $title; ?>
-                <i class="fa fa-<?php echo $icon; ?>"></i>
+                <?php if (!empty($icon)): ?>
+                    <i class="fa fa-<?php echo $icon; ?>"></i>
+                <?php endif; ?>
            </b>
 
         </a>

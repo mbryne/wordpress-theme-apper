@@ -59,7 +59,7 @@ function apper_theme_setup() {
 // Remove Admin bar
 function remove_admin_bar()
 {
-    return false;
+    return true;
 }
 
 

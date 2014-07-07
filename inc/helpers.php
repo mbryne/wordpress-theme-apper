@@ -60,3 +60,10 @@ if (!function_exists("current_path")) {
         return $_SERVER['REQUEST_URI'];
     }
 }
+
+if (!function_exists("current_server")) {
+    function current_server()
+    {
+        return $_SERVER['SERVER_NAME'];
+    }
+}
